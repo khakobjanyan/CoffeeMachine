@@ -11,43 +11,32 @@ namespace CoffeeMachine
     public static class Checking
     {
 
-        public static bool ProductChecking(List<ResourcesDTO> chossenCoffee, int coins, int price)
+        public static bool ProductChecking(ResourcesDTO chossenCoffee, int coins, int price)
         {
-            
-            int resCoffee = 0, resWater = 0, resSugger = 0,  water = 0, coffee = 0, suger = 0;
 
-            
-            var resurces = Resources.GetResurces();
+            var resources = Resources.GetResurces();
 
-            foreach (var ingredient in chossenCoffee)
-            {
-                coffee = ingredient.Coffee;
-                water = ingredient.Water;
-                suger = ingredient.Suger;
-                
-            }
+            int coffee = chossenCoffee.Coffee;
+            int water = chossenCoffee.Water;
+            int suger = chossenCoffee.Suger;
 
-            
-            foreach (var resurc in resurces)
-            {
-                resCoffee = resurc.Coffee;
-                resSugger = resurc.Suger;
-                resWater = resurc.Water;
-                
-            }
+            int resCoffee = resources.Coffee;
+            int resSugger = resources.Suger;
+            int resWater = resources.Water;
 
-            if(price > coins)
+
+            if (price > coins)
             {
                 Console.WriteLine("You don`t have enough money");
                 return false;
             }
-            if(resWater < water || resCoffee < coffee || resSugger < suger)
+            if (resWater < water || resCoffee < coffee || resSugger < suger)
             {
                 Console.WriteLine("Sorry, I`m empty, BYE");
                 Process.GetCurrentProcess().Kill();
             }
 
-            
+
 
             return true;
 

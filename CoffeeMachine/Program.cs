@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 
 namespace CoffeeMachine
 {
@@ -16,7 +17,7 @@ namespace CoffeeMachine
 
             bool checkingResult = false;
             int  coins = 0, price;
-            List<ResourcesDTO> neededResurces;
+            ResourcesDTO neededResurces;
 
             while (!checkingResult)
             {
@@ -24,12 +25,14 @@ namespace CoffeeMachine
                 coins = Coins.insertCoins(coins);
 
                 Console.WriteLine($"\nYou have {coins} coins");
+                Console.WriteLine("Please choose the coffee.");
+                Console.WriteLine("\nNamber\tName\tPrice");
                 List<ProductsDTO> products = Products.GetProductsList();
-                foreach (var item in products)
+                foreach (var item in products.OrderBy(x => x.RequiredId).ToList())
                 {
-                    Console.WriteLine($"\t{item.RequiredId}\t{item.Name}\t{item.Price}");
+                    Console.WriteLine($"{item.RequiredId}\t{item.Name}\t{item.Price}");
                 }
-                Console.WriteLine("You can choose coffee selecting coffee number from 1 to 10");
+               
                 neededResurces = Products.ChooseCoffee(products, out price);
 
                 checkingResult = Checking.ProductChecking(neededResurces, coins, price);

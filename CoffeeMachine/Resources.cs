@@ -9,9 +9,9 @@ namespace CoffeeMachine
 {
     public class Resources
     {
-        public static List<ResourcesDTO> GetResurces()
+        public static ResourcesDTO GetResurces()
         {
-            var resurces = new List<ResourcesDTO>();
+            ResourcesDTO resources = null;
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             string commandText = "SELECT * FROM Resources";
             using (var connection = new SqliteConnection(connectionString))
@@ -26,19 +26,19 @@ namespace CoffeeMachine
                     {
                         while (reader.Read())
                         {
-                            var resurc = new ResourcesDTO()
+                            resources = new ResourcesDTO()
                             {
                                 Water = reader.GetInt32(1),
                                 Coffee = reader.GetInt32(2),
                                 Suger = reader.GetInt32(3)
                             };
-                            resurces.Add(resurc);
+                           
                         }
                     }
                 }
             }
 
-            return resurces;
+            return resources;
         }
         
 

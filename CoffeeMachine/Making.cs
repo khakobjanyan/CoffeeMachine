@@ -3,30 +3,27 @@ using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Text;
 
 namespace CoffeeMachine
 {
     public static class Making
     {
-        public static void CoffeeMaking(List<ResourcesDTO> resurces, int price)
+        public static void CoffeeMaking(ResourcesDTO neededResources, int price)
         {
-            int suger = 0, coffee = 0, water = 0;
-            int resWater = 0, resSugger = 0, resCoffee = 0;
-            var resurc = Resources.GetResurces();
-            foreach (var item in resurces)
-            {
-                
-                suger = item.Suger;
-                coffee = item.Coffee;
-                water = item.Water;
-            }
-            foreach (var item in resurc)
-            {
-                resCoffee = item.Coffee;
-                resWater = item.Water;
-                resSugger = item.Suger;
-            }
+
+
+            var resourc = Resources.GetResurces();
+            int suger = neededResources.Suger;
+            int coffee = neededResources.Coffee;
+            int water = neededResources.Water;
+
+            int resCoffee = resourc.Coffee;
+            int resWater = resourc.Water;
+            int resSugger = resourc.Suger;
+            
+
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
             string sqlExpression = $"UPDATE Resources SET water={resWater - water}, suger={resSugger - suger}, coffee={resCoffee - coffee} WHERE id=1";
@@ -37,7 +34,7 @@ namespace CoffeeMachine
                 SqliteCommand command = new SqliteCommand(sqlExpression, connection);
                 command.ExecuteNonQuery();
             }
-            
+
 
         }
     }

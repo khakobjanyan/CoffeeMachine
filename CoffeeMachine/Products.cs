@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
 using CoffeeMachine.DTO;
+using System.Linq;
+using System.Diagnostics;
 
 namespace CoffeeMachine
 {
@@ -20,16 +22,10 @@ namespace CoffeeMachine
 
                 SqliteCommand command = new SqliteCommand(commandText, connection);
 
-
-
                 using (SqliteDataReader reader = command.ExecuteReader())
                 {
                     if (reader.HasRows)
                     {
-
-                        
-                        Console.WriteLine("Please choose the coffee");
-                        Console.WriteLine("\nNamber\tName\tPrice\n");
                         while (reader.Read())
                         {
                             var product = new ProductsDTO()
@@ -50,15 +46,15 @@ namespace CoffeeMachine
 
         }
 
-        public static List<ResourcesDTO> ChooseCoffee(List<ProductsDTO> products, out int price)
+        public static ResourcesDTO ChooseCoffee(List<ProductsDTO> products, out int price)
         {
             bool rightCoffe;
             int requiredId;
             price = 0;
-            var choosenCoffee = new List<ResourcesDTO>();
+            ResourcesDTO resources = null;
             do
             {
-                Console.WriteLine("Please enter number from 1 to 10");
+                Console.WriteLine("You can choose coffee selecting coffee number from 1 to 10");
                 rightCoffe = Int32.TryParse(Console.ReadLine(), out requiredId);
                 if (requiredId < 0 || requiredId > 11)
                 {
@@ -66,24 +62,25 @@ namespace CoffeeMachine
                 }
 
             } while (!rightCoffe);
-            foreach (var product in products)
+
+            var product = products.FirstOrDefault(x => x.RequiredId == requiredId);
+
+            if (product != null)
             {
-                if(product.RequiredId == requiredId)
+                resources = new ResourcesDTO()
                 {
-                    price = product.Price;
-                    var resurces = new ResourcesDTO()
-                    {
-                        Coffee = product.Coffee,
-                        Water = product.Water,
-                        Suger = product.Suger,
-                        
-                    };
-                    choosenCoffee.Add(resurces);
-                }
+                    Coffee = product.Coffee,
+                    Water = product.Water,
+                    Suger = product.Suger,
+                };
+                price = product.Price;
+            }
+            else
+            {
+                Process.GetCurrentProcess().Kill();
             }
 
-            
-            return choosenCoffee;
+            return resources;
 
         }
 
