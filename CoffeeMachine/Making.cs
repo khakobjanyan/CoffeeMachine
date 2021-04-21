@@ -29,7 +29,7 @@ namespace CoffeeMachine
             }
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
-            string sqlExpression = $"UPDATE Resurces SET water={resWater - water}, suger={resSugger - suger}, coffee={resCoffee - coffee} WHERE id=1";
+            string sqlExpression = $"UPDATE Resources SET water={resWater - water}, suger={resSugger - suger}, coffee={resCoffee - coffee} WHERE id=1";
 
             using (var connection = new SqliteConnection(connectionString))
             {
