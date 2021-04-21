@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Text;
 
 namespace CoffeeMachine
@@ -12,28 +14,30 @@ namespace CoffeeMachine
 
             int coins = haveCoins;
             bool insertCoins = true, wantAddCoins = true;
-
-            Console.WriteLine("Please insert coins");
+            var acceptedCoinsString = ConfigurationManager.AppSettings.Get("acceptedCoins");
+            var acceptedCoins = acceptedCoinsString.Split(',').ToList();
+            
+           
             while (!insertCoins || wantAddCoins)
             {
                 insertCoins = Int32.TryParse(Console.ReadLine(), out int addcoins);
 
                 if (!insertCoins && !wantAddCoins)
                 {
-                    Console.WriteLine("Please insert right coins");
+                    Console.WriteLine("Please insert right coins , allowed coins are 50,100,200,500");
                     continue;
                 }
 
 
 
-                if (addcoins == 50 || addcoins == 100 || addcoins == 200 || addcoins == 500)
+                if (acceptedCoins.Contains(addcoins.ToString()))
                 {
                     coins += addcoins;
                     wantAddCoins = AddCoins.addCoins();
                 }
                 else
                 {
-                    Console.WriteLine("Please insert right coins");
+                    Console.WriteLine("Please insert right coins , allowed coins are 50,100,200,500");
                     continue;
                 }
             }

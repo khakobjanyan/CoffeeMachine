@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CoffeeMachine
 {
@@ -8,7 +6,7 @@ namespace CoffeeMachine
     {
         public static bool addCoins()
         {
-            Console.WriteLine("Do you want add coins? \nif yes please push 'y' and 'n' if you don`t want");
+            Console.WriteLine("Do you want to add coins? \nif yes press 'y', if no press 'n'");
             bool wrongAnsver;
             do
             {
@@ -17,16 +15,12 @@ namespace CoffeeMachine
                 {
                     case ConsoleKey.Y:
                         
-                        Console.WriteLine("\nPlease add coins");
+                        Console.WriteLine("\nPlease add coins. Allowed coins are 50,100,200,500.");
                         return true;
-                        wrongAnsver = false;
-                        break;
                     case ConsoleKey.N:
                         return false;
-                        wrongAnsver = false;
-                        break;
                     default:
-                        Console.WriteLine("\nPlease push 'y' or 'n'");
+                        Console.WriteLine("\nPlease press 'y' or 'n'");
                         wrongAnsver = true;
                         break;
                 }
