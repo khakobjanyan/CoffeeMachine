@@ -10,7 +10,12 @@ namespace CoffeeMachine
 {
     public static class Making
     {
-        public static void CoffeeMaking(ResourcesDTO neededResources, int price)
+        /// <summary>
+        /// Updates resources table in data base according to the picked coffee
+        /// </summary>
+        /// <param name="neededResources"></param>
+        
+        public static void CoffeeMaking(ResourcesDTO neededResources)
         {
 
 

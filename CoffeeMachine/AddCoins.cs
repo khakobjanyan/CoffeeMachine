@@ -4,6 +4,10 @@ namespace CoffeeMachine
 {
     static class AddCoins
     {
+        /// <summary>
+        /// Used  to choose add coins or not
+        /// </summary>
+        /// <returns>True if yes and false if not</returns>
         public static bool addCoins()
         {
             Console.WriteLine("Do you want to add coins? \nif yes press 'y', if no press 'n'");

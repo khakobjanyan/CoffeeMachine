@@ -11,6 +11,10 @@ namespace CoffeeMachine
 {
     class Products
     {
+        /// <summary>
+        /// Returns the product list from Data Base 
+        /// </summary>
+        /// <returns>List contains ProductsDTO type values</returns>
         public static List<ProductsDTO> GetProductsList()
         {
             var products = new List<ProductsDTO>();
@@ -46,6 +50,12 @@ namespace CoffeeMachine
 
         }
 
+        /// <summary>
+        /// Used to choose coffee from product list
+        /// </summary>
+        /// <param name="products"></param>
+        /// <param name="price"></param>
+        /// <returns>Chosen coffee of ResourcesDTO type</returns>
         public static ResourcesDTO ChooseCoffee(List<ProductsDTO> products, out int price)
         {
             bool rightCoffe;

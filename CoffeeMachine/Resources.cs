@@ -9,6 +9,11 @@ namespace CoffeeMachine
 {
     public class Resources
     {
+
+        /// <summary>
+        /// Returns the available resources from Data Base 
+        /// </summary>
+        /// <returns>Resources</returns>
         public static ResourcesDTO GetResurces()
         {
             ResourcesDTO resources = null;

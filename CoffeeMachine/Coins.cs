@@ -9,6 +9,11 @@ namespace CoffeeMachine
     static class Coins
     {
 
+        /// <summary>
+        /// Used to add money
+        /// </summary>
+        /// <param name="haveCoins">inserted money</param>
+        /// <returns>Sum of inserted money</returns>
         public static int insertCoins(int haveCoins = 0)
         {
 

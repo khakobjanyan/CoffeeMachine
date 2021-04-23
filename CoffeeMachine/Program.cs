@@ -38,7 +38,7 @@ namespace CoffeeMachine
                 checkingResult = Checking.ProductChecking(neededResurces, coins, price);
                 if (checkingResult)
                 {
-                    Making.CoffeeMaking(neededResurces, price);
+                    Making.CoffeeMaking(neededResurces);
                     Console.WriteLine("Your Coffee is done, ENJOY");
                     Console.WriteLine($"Please take your change. Your change is:{coins - price}");
                 }
